@@ -1,5 +1,6 @@
-use crate::element::Element;
-use crate::grid::{Grid, PersonState};
+use crate::types::Element;
+use crate::states::PersonState;
+use crate::grid::Grid;
 use rand::Rng;
 
 pub fn update(grid: &mut Grid, x: usize, y: usize, rng: &mut impl Rng) {

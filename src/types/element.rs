@@ -30,7 +30,7 @@ impl Element {
             Element::Sand => Color::new(0.76, 0.70, 0.50, 1.0),
             Element::Water => Color::new(0.2, 0.4, 0.8, 1.0),
             Element::Stone => Color::new(0.5, 0.5, 0.5, 1.0),
-            Element::Person => Color::new(1.0, 0.8, 0.6, 1.0), // 살색
+            Element::Person => Color::new(1.0, 0.8, 0.6, 1.0),
         }
     }
 

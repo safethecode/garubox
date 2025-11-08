@@ -1,22 +1,8 @@
-use crate::element::Element;
+use crate::types::Element;
+use crate::states::PersonState;
 use crate::elements;
 use ::rand::Rng;
 use std::collections::HashMap;
-
-#[derive(Clone, Debug)]
-pub struct PersonState {
-    pub water_ticks: u32,
-    pub jump_velocity: i32,
-}
-
-impl PersonState {
-    pub fn new() -> Self {
-        Self {
-            water_ticks: 0,
-            jump_velocity: 0,
-        }
-    }
-}
 
 pub struct Grid {
     cells: Vec<Vec<Element>>,

@@ -1,9 +1,10 @@
-mod element;
+mod types;
+mod states;
 mod elements;
 mod grid;
 mod ui;
 
-use element::Element;
+use types::Element;
 use grid::Grid;
 use ui::GameUI;
 use macroquad::prelude::*;

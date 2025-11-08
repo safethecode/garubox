@@ -1,4 +1,4 @@
-use crate::element::Element;
+use crate::types::Element;
 use crate::grid::Grid;
 use rand::Rng;
 

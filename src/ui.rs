@@ -1,4 +1,4 @@
-use crate::element::Element;
+use crate::types::Element;
 use crate::grid::Grid;
 use macroquad::prelude::*;
 
@@ -149,7 +149,6 @@ impl GameUI {
                     let pixel_y = y as f32 * self.cell_size + game_area_start_y;
 
                     if element == Element::Person {
-                        // 사람 모양으로 그리기
                         let in_water = grid.get_person_state(x, y)
                             .map(|s| s.water_ticks > 0)
                             .unwrap_or(false);
@@ -182,22 +181,19 @@ impl GameUI {
     fn draw_person(&self, x: f32, y: f32, in_water: bool) {
         let size = self.cell_size;
 
-        // 물에 잠기면 빨간색으로 하이라이트
         let skin_color = if in_water {
-            Color::new(1.0, 0.3, 0.3, 1.0) // 빨간색
+            Color::new(1.0, 0.3, 0.3, 1.0)
         } else {
-            Color::new(1.0, 0.8, 0.6, 1.0) // 살색
+            Color::new(1.0, 0.8, 0.6, 1.0)
         };
         let cloth_color = if in_water {
-            Color::new(0.8, 0.2, 0.2, 1.0) // 어두운 빨간색
+            Color::new(0.8, 0.2, 0.2, 1.0)
         } else {
-            Color::new(0.2, 0.4, 0.9, 1.0) // 파란색
+            Color::new(0.2, 0.4, 0.9, 1.0)
         };
 
-        // 머리 (상단 1/3)
         draw_circle(x + size / 2.0, y + size * 0.25, size * 0.3, skin_color);
 
-        // 몸통 (중간)
         draw_rectangle(
             x + size * 0.25,
             y + size * 0.4,
@@ -206,7 +202,6 @@ impl GameUI {
             cloth_color,
         );
 
-        // 다리 (하단)
         draw_line(
             x + size * 0.35,
             y + size * 0.75,
@@ -224,7 +219,6 @@ impl GameUI {
             cloth_color,
         );
 
-        // 팔
         draw_line(
             x + size * 0.25,
             y + size * 0.5,
