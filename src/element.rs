@@ -9,6 +9,19 @@ pub enum Element {
 }
 
 impl Element {
+    pub fn all() -> Vec<Element> {
+        vec![Element::Sand, Element::Water, Element::Stone, Element::Air]
+    }
+
+    pub fn name(&self) -> &str {
+        match self {
+            Element::Air => "Eraser",
+            Element::Sand => "Sand",
+            Element::Water => "Water",
+            Element::Stone => "Stone",
+        }
+    }
+
     pub fn color(&self) -> Color {
         match self {
             Element::Air => BLACK,

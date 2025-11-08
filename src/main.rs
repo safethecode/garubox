@@ -16,6 +16,7 @@ async fn main() {
     let mut ui = GameUI::new(CELL_SIZE);
 
     for x in 0..GRID_WIDTH {
+        grid.set(x, 0, Element::Stone);
         grid.set(x, GRID_HEIGHT - 1, Element::Stone);
     }
     for y in 0..GRID_HEIGHT {
