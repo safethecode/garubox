@@ -51,6 +51,9 @@ impl GameUI {
             self.selected_element = Element::Stone;
         }
         if is_key_pressed(KeyCode::Key4) {
+            self.selected_element = Element::Person;
+        }
+        if is_key_pressed(KeyCode::Key5) {
             self.selected_element = Element::Air;
         }
 
@@ -142,13 +145,24 @@ impl GameUI {
             for x in 0..grid.width() {
                 let element = grid.get(x, y);
                 if element != Element::Air {
-                    draw_rectangle(
-                        x as f32 * self.cell_size,
-                        y as f32 * self.cell_size + game_area_start_y,
-                        self.cell_size,
-                        self.cell_size,
-                        element.color(),
-                    );
+                    let pixel_x = x as f32 * self.cell_size;
+                    let pixel_y = y as f32 * self.cell_size + game_area_start_y;
+
+                    if element == Element::Person {
+                        // 사람 모양으로 그리기
+                        let in_water = grid.get_person_state(x, y)
+                            .map(|s| s.water_ticks > 0)
+                            .unwrap_or(false);
+                        self.draw_person(pixel_x, pixel_y, in_water);
+                    } else {
+                        draw_rectangle(
+                            pixel_x,
+                            pixel_y,
+                            self.cell_size,
+                            self.cell_size,
+                            element.color(),
+                        );
+                    }
                 }
             }
         }
@@ -163,6 +177,70 @@ impl GameUI {
         if self.paused {
             draw_text("PAUSED", screen_width() - 100.0, 40.0, 20.0, RED);
         }
+    }
+
+    fn draw_person(&self, x: f32, y: f32, in_water: bool) {
+        let size = self.cell_size;
+
+        // 물에 잠기면 빨간색으로 하이라이트
+        let skin_color = if in_water {
+            Color::new(1.0, 0.3, 0.3, 1.0) // 빨간색
+        } else {
+            Color::new(1.0, 0.8, 0.6, 1.0) // 살색
+        };
+        let cloth_color = if in_water {
+            Color::new(0.8, 0.2, 0.2, 1.0) // 어두운 빨간색
+        } else {
+            Color::new(0.2, 0.4, 0.9, 1.0) // 파란색
+        };
+
+        // 머리 (상단 1/3)
+        draw_circle(x + size / 2.0, y + size * 0.25, size * 0.3, skin_color);
+
+        // 몸통 (중간)
+        draw_rectangle(
+            x + size * 0.25,
+            y + size * 0.4,
+            size * 0.5,
+            size * 0.35,
+            cloth_color,
+        );
+
+        // 다리 (하단)
+        draw_line(
+            x + size * 0.35,
+            y + size * 0.75,
+            x + size * 0.35,
+            y + size,
+            size * 0.2,
+            cloth_color,
+        );
+        draw_line(
+            x + size * 0.65,
+            y + size * 0.75,
+            x + size * 0.65,
+            y + size,
+            size * 0.2,
+            cloth_color,
+        );
+
+        // 팔
+        draw_line(
+            x + size * 0.25,
+            y + size * 0.5,
+            x,
+            y + size * 0.6,
+            size * 0.15,
+            skin_color,
+        );
+        draw_line(
+            x + size * 0.75,
+            y + size * 0.5,
+            x + size,
+            y + size * 0.6,
+            size * 0.15,
+            skin_color,
+        );
     }
 
     fn clear_grid(&self, grid: &mut Grid) {
