@@ -4,7 +4,6 @@ A pixel-based falling sand game built with Rust and macroquad. Experience realis
 
 ![Garubox](https://img.shields.io/badge/version-0.1.0-blue)
 ![Rust](https://img.shields.io/badge/rust-2024-orange)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Features
 
@@ -15,43 +14,6 @@ A pixel-based falling sand game built with Rust and macroquad. Experience realis
 - **Intuitive UI**: Button-based element selection with visual previews
 - **Keyboard Shortcuts**: Quick element switching with number keys
 - **Pause & Clear**: Control simulation flow with Space and C keys
-
-## Current Elements
-
-### 🟨 Sand
-
-A granular powder that falls and piles up. Forms natural slopes and flows through gaps.
-
-### 🟦 Water
-
-Liquid element with fluid dynamics. Flows horizontally and fills containers. Can drown people.
-
-### 🟫 Stone
-
-Solid, immovable material. Perfect for building structures and boundaries.
-
-### 🧑 Person
-
-AI-controlled entity with intelligent behavior:
-
-- Walks randomly left and right
-- Jumps over obstacles
-- Climbs up slopes
-- Drowns after 10 seconds (600 ticks) in water or sand
-- Visual indicator when suffocating (turns red)
-
-### ⬛ Air (Eraser)
-
-Removes elements from the canvas.
-
-## Controls
-
-| Key                  | Action                                       |
-| -------------------- | -------------------------------------------- |
-| **1-5**              | Select element (Sand/Water/Stone/Person/Air) |
-| **Mouse Left Click** | Draw selected element                        |
-| **Space**            | Pause/Resume simulation                      |
-| **C**                | Clear canvas                                 |
 
 ## Building and Running
 
@@ -76,19 +38,19 @@ cargo run --release
 
 ```
 src/
-├── main.rs           # Entry point and main game loop
-├── grid.rs           # Grid management and cell updates
-├── ui.rs             # User interface and rendering
+├── main.rs
+├── grid.rs
+├── ui.rs
 ├── types/
-│   └── element.rs    # Element definitions and properties
+│   └── element.rs
 ├── elements/
-│   ├── sand.rs       # Sand physics
-│   ├── water.rs      # Water fluid dynamics
-│   ├── stone.rs      # Stone (static element)
-│   ├── person.rs     # Person AI behavior
-│   └── air.rs        # Air element
+│   ├── sand.rs
+│   ├── water.rs
+│   ├── stone.rs
+│   ├── person.rs
+│   └── air.rs
 └── states/
-    └── person_state.rs  # Person state management
+    └── person_state.rs
 ```
 
 ## Roadmap: Planned Elements (50+)
